@@ -1,0 +1,64 @@
+// /**
+//  *
+//  */
+
+.#{map-get($bemit, 'object')}box {
+  $_box: &;
+
+  @extend %full-block;
+
+  height: 100%;
+
+  & > &__content {
+    @extend %full-block;
+
+    height: 100%;
+  }
+
+  &__image {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+    &--fill {
+      background-size: cover;
+    }
+  }
+
+  &--ratio {
+    height: 0px;
+    padding-top: 100%;
+
+    @each $v, $h in $aspect-ratio-values {
+      &#{&}-#{$v}-#{$h} {
+        padding-top: $h / $v * 100%;
+      }
+
+      &#{&}-#{$h}-#{$v} {
+        padding-top: $v / $h * 100%;
+      }
+    }
+
+    & > #{$_box}__image,
+    & > #{$_box}__content {
+      @include fit-parent-absolute();
+    }
+  }
+
+  &--shadow {
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      right: 0px;
+      bottom: 0px;
+
+      box-shadow: inset 0px 0px 8px rgba(0, 0, 0, 0.6);
+    }
+
+    & > * {
+      position: static;
+    }
+  }
+}

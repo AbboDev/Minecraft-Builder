@@ -2,17 +2,12 @@ const path = require("path");
 const webpack = require("webpack");
 const es6_promise = require('es6-promise');
 
-// const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 /**
  * Plugins
  */
 const plugins = [
-  // new ExtractTextPlugin({
-  //   filename: "css/app.css",
-  //   allChunks: true
-  // }),
   new VueLoaderPlugin()
 ];
 
@@ -35,13 +30,9 @@ const config = {
   entry: [
     "./src/js/app.js"
   ],
-  devServer: {
-    host: "history-paths.crystalware.test",
-    port: 8080
-  },
 
   output: {
-    path: path.resolve(__dirname, "assets"),
+    path: path.resolve(__dirname, "public/assets"),
     publicPath: "../",
     filename: "js/app.js"
   },
@@ -74,7 +65,6 @@ const config = {
           {
             loader: "css-loader",
             options: {
-              // modules: true,
               sourceMap: false,
               importLoaders: 1
             }

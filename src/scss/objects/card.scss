@@ -1,0 +1,9 @@
+// /**
+//  *
+//  */
+
+.#{map-get($bemit, 'object')}card {
+  $_card: &;
+
+  @extend %full-block;
+}

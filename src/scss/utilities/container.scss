@@ -1,0 +1,41 @@
+// /**
+//  *
+//  */
+
+.#{map-get($bemit, 'utility')}container {
+  $_self: &;
+
+  @for $i from 1 through $max-text-columns {
+    &--columns-#{$i} {
+      columns: $i;
+    }
+  }
+
+  &--horizontal-scrollable {
+    overflow-x: auto;
+
+    &#{&}--visible {
+      overflow-x: scroll;
+    }
+  }
+
+  &--vertical-scrollable {
+    overflow-y: auto;
+
+    &#{&}--visible {
+      overflow-y: scroll;
+    }
+  }
+
+  &--full-scrollable {
+    overflow: auto;
+
+    &#{&}--visible {
+      overflow: scroll;
+    }
+  }
+
+  &--full-height {
+    height: 100%;
+  }
+}

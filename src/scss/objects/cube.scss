@@ -1,0 +1,9 @@
+// /**
+//  *
+//  */
+
+.#{map-get($bemit, 'object')}cube {
+  $_cube: &;
+
+  @extend %full-block;
+}
