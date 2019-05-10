@@ -1,0 +1,14 @@
+{
+    "name": "crystalware/minecraft-builder",
+    "description": "Minecraft 3d builder with .nbt import/export",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Thomas",
+            "email": "thomas.abbondi@crystalware.cloud"
+        }
+    ],
+    "require": {
+      "rickselby/nbt": "~4.0"
+    }
+}
