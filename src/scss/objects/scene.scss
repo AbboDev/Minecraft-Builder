@@ -1,0 +1,18 @@
+// /**
+//  *
+//  */
+
+.#{map-get($bemit, 'object')}scene {
+  $_scene: &;
+
+  $_width: map-get($cube, 'width');
+  $_height: map-get($cube, 'width');
+
+  @extend %full-block;
+
+  width: #{$_width}px;
+  height: #{$_height}px;
+  perspective: #{if($_width > $_height, $_width, $_height) * 3}px;
+
+  margin: 0px auto;
+}

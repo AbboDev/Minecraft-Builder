@@ -4,6 +4,7 @@
 
 .#{map-get($bemit, 'object')}page {
   $_page: &;
+
   top: #{$padding * 2}px;
   left: #{$padding * 2}px;
   right: #{$padding * 2}px;

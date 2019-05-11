@@ -8,6 +8,7 @@
         <div class="o-container__row__column o-container__row__column--6 u-text--right">
           <nav>
             <router-link to="/">Home</router-link>
+            <router-link to="/editor">Editor</router-link>
           </nav>
         </div>
       </div>

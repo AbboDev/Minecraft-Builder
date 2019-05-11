@@ -2,8 +2,84 @@
 //  *
 //  */
 
+$cube: (
+  'width': 64,
+  'height': 64
+);
+
+/* --- Scene */
+@import './objects/scene';
+
 .#{map-get($bemit, 'object')}cube {
   $_cube: &;
 
-  @extend %full-block;
+  $_width: map-get($cube, 'width');
+  $_height: map-get($cube, 'width');
+  $_ratio: if($_width > $_height, $_width, $_height);
+  $_z: $_ratio / 2;
+
+  width: #{$_width}px;
+  height: #{$_height}px;
+
+  top: 0px;
+  left: 0px;
+  position: absolute;
+  // position: relative;
+
+  transform-style: preserve-3d;
+  transform: translateZ(-#{$_z}px);
+
+  // padding: 5%;
+  // display: inline-block;
+  // box-sizing: content-box;
+
+  &--animated {
+    will-change: transform;
+    transition-property: transform;
+  }
+
+  &--hoverable {
+    border: 1px solid transparent;
+
+    &:hover {
+      border-color: $primary;
+    }
+  }
+
+  &__face {
+    position: absolute;
+    width: #{$_width}px;
+    height: #{$_height}px;
+    opacity: 0.5;
+
+    &--front {
+      background-color: red;
+      transform: rotateY(0deg) translateZ(#{$_z}px);
+    }
+
+    &--right {
+      background-color: yellow;
+      transform: rotateY(90deg) translateZ(#{$_z}px);
+    }
+
+    &--back {
+      background-color: blue;
+      transform: rotateY(180deg) translateZ(#{$_z}px);
+    }
+
+    &--left {
+      background-color: green;
+      transform: rotateY(-90deg) translateZ(#{$_z}px);
+    }
+
+    &--top {
+      background-color: orange;
+      transform: rotateX(90deg) translateZ(#{$_z}px);
+    }
+
+    &--bottom {
+      background-color: purple;
+      transform: rotateX(-90deg) translateZ(#{$_z}px);
+    }
+  }
 }
