@@ -5,21 +5,41 @@
 .#{map-get($bemit, 'object')}page {
   $_page: &;
 
-  top: #{$padding * 2}px;
-  left: #{$padding * 2}px;
-  right: #{$padding * 2}px;
-  bottom: #{$padding * 2}px;
-  width: calc(100% - #{$padding * 4}px);
-  height: calc(100% - #{$padding * 4}px);
-  position: absolute;
-  transition: transform #{$transition-time * 4};
-  transform-style: preserve-3d;
+  @if (map-has-key($page, 'contained') and map-get($page, 'contained') == true) {
+    top: #{$padding * 2}px;
+    left: #{$padding * 2}px;
+    right: #{$padding * 2}px;
+    bottom: #{$padding * 2}px;
+    position: absolute;
 
-  overflow-x: hidden;
-  overflow-y: auto;
+    width: calc(100% - #{$padding * 4}px);
+    height: calc(100% - #{$padding * 4}px);
+
+    overflow-x: hidden;
+    overflow-y: auto;
+    border: 1px solid $primary;
+
+    @media (min-width: #{map-get($break-points, 'md')}px) {
+      overflow-y: hidden;
+
+      $container: '.#{map-get($bemit, 'object')}container';
+
+      &__face,
+      #{$container},
+      #{$container}__row {
+        height: 100%;
+      }
+
+      &__content {
+        max-height: 100%;
+        overflow-y: auto;
+      }
+    }
+  }
+
+  transition: transform #{$transition-time * 4};
 
   background: $background;
-  border: 1px solid $primary;
 
   &__face {
     width: 100%;
@@ -38,23 +58,6 @@
       background: $background;
       position: absolute;
       transform: rotateY(180deg);
-    }
-  }
-
-  @media (min-width: #{map-get($break-points, 'md')}px) {
-    overflow-y: hidden;
-
-    $container: '.#{map-get($bemit, 'object')}container';
-
-    &__face,
-    #{$container},
-    #{$container}__row {
-      height: 100%;
-    }
-
-    &__content {
-      max-height: 100%;
-      overflow-y: auto;
     }
   }
 }
