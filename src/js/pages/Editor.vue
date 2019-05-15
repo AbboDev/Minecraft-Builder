@@ -6,7 +6,7 @@
           <div class="o-container__row__column o-container__row__column--12">
             <h1>Editor</h1>
             <section class="o-scene">
-              <cube v-for="cube in cubes"
+              <cube v-for="cube in sortedCubes"
                 :x="cube.x"
                 :y="cube.y"
                 :identifier="cube.identifier"
@@ -32,17 +32,53 @@ export default {
         y: 0,
       },
       {
+        x: 0,
+        y: 1,
+      },
+      {
         x: 1,
-        y: 2,
+        y: 0,
+      },
+      {
+        x: 2,
+        y: 0,
+      },
+      {
+        x: 1,
+        y: 1,
         identifier: 'gravel'
       },
       {
-        x: -1,
-        y: -1,
+        x: 1,
+        y: 2,
         identifier: 'gravel'
       }
     ]
   }),
+  computed: {
+    sortedCubes: function() {
+      return this.cubes.slice()
+        .sort(function(a, b) {
+          if (a.x < b.x) {
+            return -1;
+          } else if (a.x > b.x) {
+            return 1;
+          } else {
+            return 0;
+          }
+        })
+        .sort(function(a, b) {
+          if (a.y < b.y) {
+            return -1;
+          } else if (a.y > b.y) {
+            return 1;
+          } else {
+            return 0;
+          }
+        })
+        .reverse();
+    }
+  },
   components: {
     Cube
   }

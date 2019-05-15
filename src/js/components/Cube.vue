@@ -3,10 +3,7 @@
     :data-x="x"
     :data-y="y"
     :data-type="identifier"
-    :style="{
-      top: topOffset,
-      left: leftOffset
-    }"
+    :style="style"
   >
     <div class="o-cube__face o-cube__face--front"></div>
     <div class="o-cube__face o-cube__face--back"></div>
@@ -23,21 +20,30 @@ export default {
   data: function() {
     return {
       blockClass: 'o-cube',
-      topOffset: this.calculateOffsetPercentage(this.x),
-      leftOffset: this.calculateOffsetPercentage(this.y),
+      yOffset: this.calculateOffsetPercentage(this.y),
+      xOffset: this.calculateOffsetPercentage(this.x),
     };
   },
   computed: {
     computedClass: function() {
       return this.blockClass + '--' + this.identifier;
+    },
+    style: function() {
+      // eslint-disable-next-line no-console
+      console.log(this.$el);
+      // eslint-disable-next-line no-console
+      console.log(`translate3d(${this.xOffset}, -${this.yOffset}, -32px)`);
+      return {
+        transform: `translate3d(${this.xOffset}, -${this.yOffset}, -32px)`
+      };
     }
   },
   watch: {
     x: function(val) {
-      this.leftOffset = this.calculateOffsetPercentage(val);
+      this.xOffset = this.calculateOffsetPercentage(val);
     },
     y: function(val) {
-      this.topOffset = this.calculateOffsetPercentage(val);
+      this.yOffset = this.calculateOffsetPercentage(val);
     }
   },
   methods: {

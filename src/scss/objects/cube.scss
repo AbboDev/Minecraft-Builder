@@ -21,8 +21,12 @@ $cube: (
   width: #{$_width}px;
   height: #{$_height}px;
 
-  top: 0px;
+  // top: 0px;
+  top: auto;
   left: 0px;
+  // right: 0px;
+  right: auto;
+  bottom: 0px;
   position: absolute;
   // position: relative;
 
@@ -50,7 +54,7 @@ $cube: (
     position: absolute;
     width: #{$_width}px;
     height: #{$_height}px;
-    opacity: 0.5;
+    // opacity: 0.5;
 
     &--front {
       background-color: red;
