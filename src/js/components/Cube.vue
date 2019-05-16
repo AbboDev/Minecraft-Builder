@@ -1,7 +1,9 @@
 <template lang="html">
-  <div :class="[blockClass, computedClass]"
+  <div ref="cube"
+    :class="[blockClass, computedClass]"
     :data-x="x"
     :data-y="y"
+    :data-z="z"
     :data-type="identifier"
     :style="style"
   >
@@ -20,8 +22,9 @@ export default {
   data: function() {
     return {
       blockClass: 'o-cube',
-      yOffset: this.calculateOffsetPercentage(this.y),
       xOffset: this.calculateOffsetPercentage(this.x),
+      yOffset: this.calculateOffsetPercentage(this.y),
+      zOffset: this.calculateOffsetPixel(this.z),
     };
   },
   computed: {
@@ -29,12 +32,10 @@ export default {
       return this.blockClass + '--' + this.identifier;
     },
     style: function() {
-      // eslint-disable-next-line no-console
-      console.log(this.$el);
-      // eslint-disable-next-line no-console
-      console.log(`translate3d(${this.xOffset}, -${this.yOffset}, -32px)`);
       return {
-        transform: `translate3d(${this.xOffset}, -${this.yOffset}, -32px)`
+        width: `${this.width}px`,
+        height: `${this.width}px`,
+        transform: `translate3d(${this.xOffset}, -${this.yOffset}, -${this.zOffset})`
       };
     }
   },
@@ -44,12 +45,18 @@ export default {
     },
     y: function(val) {
       this.yOffset = this.calculateOffsetPercentage(val);
+    },
+    z: function(val) {
+      this.zOffset = this.calculateOffsetPixel(val);
     }
   },
   methods: {
     calculateOffsetPercentage: function(val) {
-      return val * 100 + '%';
-    }
+      return (val * 100) + '%';
+    },
+    calculateOffsetPixel(val) {
+      return ((this.width / 2) + (this.width * val)) + 'px';
+    },
   },
   props: {
     x: {
@@ -59,6 +66,14 @@ export default {
     y: {
       type: Number,
       default: 0
+    },
+    z: {
+      type: Number,
+      default: 0
+    },
+    width: {
+      type: Number,
+      default: 64
     },
     identifier: {
       type: String,
