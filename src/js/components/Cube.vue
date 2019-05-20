@@ -23,8 +23,8 @@ export default {
     return {
       blockClass: 'o-cube',
       xOffset: this.calculateOffsetPercentage(this.x),
-      yOffset: this.calculateOffsetPercentage(this.y),
-      zOffset: this.calculateOffsetPixel(this.z),
+      yOffset: this.calculateOffsetPercentage(-this.y),
+      zOffset: this.calculateOffsetPixel(-this.z),
     };
   },
   computed: {
@@ -35,7 +35,7 @@ export default {
       return {
         width: `${this.width}px`,
         height: `${this.width}px`,
-        transform: `translate3d(${this.xOffset}, -${this.yOffset}, -${this.zOffset})`
+        transform: `translate3d(${this.xOffset}, ${this.yOffset}, ${this.zOffset})`
       };
     }
   },
@@ -44,10 +44,10 @@ export default {
       this.xOffset = this.calculateOffsetPercentage(val);
     },
     y: function(val) {
-      this.yOffset = this.calculateOffsetPercentage(val);
+      this.yOffset = this.calculateOffsetPercentage(-val);
     },
     z: function(val) {
-      this.zOffset = this.calculateOffsetPixel(val);
+      this.zOffset = this.calculateOffsetPixel(-val);
     }
   },
   methods: {
@@ -55,7 +55,7 @@ export default {
       return (val * 100) + '%';
     },
     calculateOffsetPixel(val) {
-      return ((this.width / 2) + (this.width * val)) + 'px';
+      return ((-this.width / 2) + (this.width * val)) + 'px';
     },
   },
   props: {

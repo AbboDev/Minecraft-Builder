@@ -15,6 +15,45 @@
                 v-bind:key="cube.id"
               />
             </section>
+            <div style="margin-top:20px">
+              <label for="x">x</label>
+              <input
+                id="x"
+                ref="x"
+                name="x"
+                min="0"
+                step="1"
+                value="0"
+                type="number"
+              />
+            </div>
+            <div style="margin-top:20px">
+              <label for="y">y</label>
+              <input
+                id="y"
+                ref="y"
+                name="y"
+                min="0"
+                step="1"
+                value="0"
+                type="number"
+              />
+            </div>
+            <div style="margin-top:20px">
+              <label for="z">z</label>
+              <input
+                id="z"
+                ref="z"
+                name="z"
+                min="0"
+                step="1"
+                value="0"
+                type="number"
+              />
+            </div>
+            <div style="margin-top:20px">
+              <button type="button" id="button" name="button" @click="addCube">Add cube</button>
+            </div>
           </div>
         </div>
       </div>
@@ -29,52 +68,7 @@ export default {
   name: 'page-editor',
   data: () => ({
     defaultWidìth: 64,
-    cubes: [
-      {
-        x: 0,
-        y: 0,
-        z: 0,
-      },
-      {
-        x: 0,
-        y: 1,
-        z: 1,
-      },
-      {
-        x: 1,
-        y: 0,
-        z: 0,
-      },
-      {
-        x: 2,
-        y: 0,
-        z: 0,
-      },
-      {
-        x: 1,
-        y: 1,
-        z: 0,
-        identifier: 'gravel'
-      },
-      {
-        x: 1,
-        y: 2,
-        z: 0,
-        identifier: 'gravel'
-      },
-      {
-        x: 0,
-        y: 2,
-        z: 2,
-        identifier: 'gravel'
-      },
-      {
-        x: 1,
-        y: 2,
-        z: 2,
-        identifier: 'gravel'
-      }
-    ]
+    cubes: []
   }),
   computed: {
     sortedCubes: function() {
@@ -107,6 +101,27 @@ export default {
           }
         })
         .reverse();
+    }
+  },
+  methods: {
+    addCube: function() {
+      let cube = {
+        x: parseInt(this.$refs.x.value),
+        y: parseInt(this.$refs.y.value),
+        z: parseInt(this.$refs.z.value)
+      };
+
+      // eslint-disable-next-line no-console
+      console.log(this.cubes);
+      let exist = this.cubes.some(function(currentCube) {
+        return cube.x === currentCube.x
+          && cube.y === currentCube.y
+          && cube.z === currentCube.z;
+      });
+
+      if (exist === false) {
+        this.cubes.push(cube);
+      }
     }
   },
   components: {
