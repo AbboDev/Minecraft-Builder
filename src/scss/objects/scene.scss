@@ -12,7 +12,8 @@
 
   width: #{$_width}px;
   height: #{$_height}px;
-  perspective: #{if($_width > $_height, $_width, $_height) * 3}px;
+  perspective: #{if($_width > $_height, $_width, $_height) * 16}px;
+  // perspective: #{if($_width > $_height, $_width, $_height) * 3}px;
 
   margin: 0px auto;
 }
